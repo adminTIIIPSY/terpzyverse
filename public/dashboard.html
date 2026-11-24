@@ -60,9 +60,6 @@
       box-shadow: 0 0 10px red, 0 0 15px green;
       text-align: center;
     }
-    .wallet-preview p {
-      margin: 0.3em 0;
-    }
     .wallet-preview a {
       display: inline-block;
       margin-top: 1em;
@@ -97,43 +94,8 @@
   </div>
 
   <div class="wallet-preview">
-    <h2>VaultNova Wallet Preview</h2>
-    <p><strong>Gold Coins:</strong> <span id="gc">–</span></p>
-    <p><strong>Sweeps Coins:</strong> <span id="sc">–</span></p>
-    <p><strong>$TRPZ:</strong> <span id="trpz">–</span></p>
-    <a href="wallet.html">View Full Wallet</a>
+    <h2>VaultNova Wallet</h2>
+    <a href="https://wallet.slot13studios.com/#records">View historical wallet balances</a>
   </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAAJfscsLm4TdBzbYZ5dYa1BWZwpSPcVf8",
-      authDomain: "terpzyverseclubsocial.firebaseapp.com",
-      projectId: "terpzyverseclubsocial",
-      storageBucket: "terpzyverseclubsocial.firebasestorage.app",
-      messagingSenderId: "125077088870",
-      appId: "1:125077088870:web:91195a40d290c6bff09ba7"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    const db = getFirestore(app);
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const docRef = doc(db, "wallets", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          document.getElementById("gc").textContent = data.gc ?? 0;
-          document.getElementById("sc").textContent = data.sc ?? 0;
-          document.getElementById("trpz").textContent = data.trpz ?? 0;
-        }
-      }
-    });
-  </script>
 </body>
 </html>
